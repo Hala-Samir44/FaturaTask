@@ -1,5 +1,5 @@
 <template>
-  <div v-if="commentDialogOpen">
+  <div v-if="false">
     <div
       class="
         w-100
