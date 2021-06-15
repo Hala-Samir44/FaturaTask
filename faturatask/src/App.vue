@@ -10,13 +10,13 @@ export default {
   name: "App",
   components: {},
   mounted() {
-    var LikedMovies = localStorage.getItem("LikedMovies");
-    var FavorMovies = localStorage.getItem("FavorMovies");
-    var MovieComments = localStorage.getItem("MovieComments");
+    var LikedGifs = localStorage.getItem("LikedGifs");
+    var FavorGifs = localStorage.getItem("FavorGifs");
+    var GifComments = localStorage.getItem("GifComments");
 
-    if (!LikedMovies) localStorage.setItem("LikedMovies", "[]");
-    if (!FavorMovies) localStorage.setItem("FavorMovies", "[]");
-    if (!MovieComments) localStorage.setItem("MovieComments", "[]");
+    if (!LikedGifs) localStorage.setItem("LikedGifs", "[]");
+    if (!FavorGifs) localStorage.setItem("FavorGifs", "[]");
+    if (!GifComments) localStorage.setItem("GifComments", "[]");
   },
 };
 </script>

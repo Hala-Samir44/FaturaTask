@@ -1,5 +1,5 @@
 <template>
-  <p class="text-warning">gifView</p>
+   <div><router-link to="/home" class="btn bg-white mt-5 w-25"  style="background-image: linear-gradient(to right, white, #2ed8d8);font-size: 20px">Back To Home</router-link></div>
   <GifCard :gifData="gifData" :isGifView="true"></GifCard>
 </template>
 <script>

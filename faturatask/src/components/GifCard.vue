@@ -75,7 +75,7 @@
       <div v-if="isGifView" class="m-3">
         <hr />
         <h5>Comments</h5>
-        <div v-for="com of MovieComments" :key="com.id">
+        <div v-for="com of GifComments" :key="com.id">
           <div
             class="
               p-3
@@ -189,7 +189,7 @@ export default {
       isLike: undefined,
       isfavor: undefined,
       noOfComment: undefined,
-      MovieComments: [],
+      GifComments: [],
       openReply: false,
       newComment: "",
       newReply: "",
@@ -216,17 +216,17 @@ export default {
       ).format("DD/MM/YYYY");
     },
     isLike() {
-      var LikedMovies = JSON.parse(localStorage.getItem("LikedMovies") ?? "");
-      this.isLike = LikedMovies?.includes(this.gifData.id);
+      var LikedGifs = JSON.parse(localStorage.getItem("LikedGifs") ?? "");
+      this.isLike = LikedGifs?.includes(this.gifData.id);
     },
     isfavor() {
-      var FavorMovies = JSON.parse(localStorage.getItem("FavorMovies") ?? "");
-      this.isfavor = FavorMovies?.includes(this.gifData.id);
+      var FavorGifs = JSON.parse(localStorage.getItem("FavorGifs") ?? "");
+      this.isfavor = FavorGifs?.includes(this.gifData.id);
     },
     noOfComment() {
-      var comments = JSON.parse(localStorage.getItem("MovieComments") ?? "");
-      this.MovieComments = comments.filter((i) => i.movieId == this.gifData.id);
-      this.noOfComment = this.MovieComments?.length;
+      var comments = JSON.parse(localStorage.getItem("GifComments") ?? "");
+      this.GifComments = comments.filter((i) => i.GifId == this.gifData.id);
+      this.noOfComment = this.GifComments?.length;
     },
   },
   methods: {
@@ -245,31 +245,31 @@ export default {
     convertDate(dte) {
       return moment(String(dte)).format("DD/MM/YYYY");
     },
-    LikedOrNo(movId) {
-      var LikedMovies = JSON.parse(localStorage.getItem("LikedMovies") ?? "");
-      var like = LikedMovies.includes(movId);
+    LikedOrNo(gifId) {
+      var LikedGifs = JSON.parse(localStorage.getItem("LikedGifs") ?? "");
+      var like = LikedGifs.includes(gifId);
       if (like) {
-        LikedMovies = LikedMovies.filter((i) => i != movId);
+        LikedGifs = LikedGifs.filter((i) => i != gifId);
       } else {
-        LikedMovies.push(movId);
+        LikedGifs.push(gifId);
       }
-      localStorage.setItem("LikedMovies", JSON.stringify(LikedMovies));
+      localStorage.setItem("LikedGifs", JSON.stringify(LikedGifs));
       this.isLike = !this.isLike;
     },
     FavorOrNo() {
-      var FavorMovies = JSON.parse(localStorage.getItem("FavorMovies") ?? "");
-      var favor = FavorMovies.includes(this.gifData.id);
+      var FavorGifs = JSON.parse(localStorage.getItem("FavorGifs") ?? "");
+      var favor = FavorGifs.includes(this.gifData.id);
       if (favor) {
-        FavorMovies = FavorMovies.filter((i) => i != this.gifData.id);
+        FavorGifs = FavorGifs.filter((i) => i != this.gifData.id);
       } else {
-        FavorMovies.push(this.gifData.id);
+        FavorGifs.push(this.gifData.id);
       }
-      localStorage.setItem("FavorMovies", JSON.stringify(FavorMovies));
+      localStorage.setItem("FavorGifs", JSON.stringify(FavorGifs));
       this.isfavor = !this.isfavor;
     },
     addComment(commentText, isReply, gifId = this.gifData.id) {
-      var comments = JSON.parse(localStorage.getItem("MovieComments") ?? "");
-      var oldcomments = comments.filter((i) => i.movieId == gifId);
+      var comments = JSON.parse(localStorage.getItem("GifComments") ?? "");
+      var oldcomments = comments.filter((i) => i.GifId == gifId);
 
       if (isReply) {
         var oldcomment = oldcomments.find((i) => i.id == this.commentId);
@@ -278,12 +278,12 @@ export default {
         var newComment = {
           id: oldcomments.length,
           text: commentText,
-          movieId: gifId,
+          GifId: gifId,
           replies: [],
         };
         comments.push(newComment);
       }
-      localStorage.setItem("MovieComments", JSON.stringify(comments));
+      localStorage.setItem("GifComments", JSON.stringify(comments));
       this.noOfComment = !this.noOfComment;
     },
   },
